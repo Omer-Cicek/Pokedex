@@ -66,7 +66,3 @@ const createPokemonCard = (pokemon) => {
 };
 
 fetchPokemon();
-
-const number = 001;
-const ömer = number.toFixed();
-console.log(ömer);
