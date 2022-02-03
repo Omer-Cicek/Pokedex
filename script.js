@@ -1,5 +1,7 @@
-const pokeContainer = document.getElementById('poke-container');
-const pokemon_count = 20;
+const searchInput = document.querySelector('#poke-input');
+const searchBtn = document.querySelector('.btn-search');
+const pokeContainer = document.querySelector('.poke-container');
+const pokeCount = 151;
 
 const colors = {
   fire: `#FDDFDF`,
@@ -17,52 +19,53 @@ const colors = {
   fighting: `#E6E0D4`,
   normal: `#F5F5F5`,
 };
-
-const main_types = Object.keys(colors);
-
-const fetchPokemon = async () => {
-  for (let i = 1; i <= pokemon_count; i++) {
+//CALLING EVERY POKEMON
+const initPokemon = async () => {
+  for (let i = 1; i <= pokeCount; i++) {
     await getPokemon(i);
   }
 };
+//GETTING DATA FOR EVERY POKEMON
 const getPokemon = async (id) => {
   const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
-  const res = await fetch(url);
-  const data = await res.json();
-  createPokemonCard(data);
-  console.log(data);
+  const getUrl = await fetch(url);
+  const getData = await getUrl.json();
+  createPokemonBox(getData);
 };
-
-const createPokemonCard = (pokemon) => {
-  const pokemonEl = document.createElement('div');
-
-  pokemonEl.classList.add('pokemon');
-
-  const name =
-    pokemon.name[0].toUpperCase() + pokemon.name.slice(1).toLowerCase();
-
-  const id = pokemon.id.toString().padStart(3, '0');
-
-  const poki_types = pokemon.types.map((type) => type.type.name);
-  const type = main_types.find((type) => poki_types.indexOf(type) > -1);
+//RENDERING AND USING OUR CARD WİTH POKEMONS OWN PROPERTIES
+const createPokemonBox = (data) => {
+  //render data
+  const name = data.name[0].toUpperCase() + data.name.slice(1);
+  const id = data.id.toString().padStart(3, '0');
+  const weight = data.weight;
+  const type = data.types[0].type.name;
   const color = colors[type];
-  pokemonEl.style.backgroundColor = color;
 
-  const pokemonInnerHtml = `
-    <div class="pokemon">
-      <div class="img-container">
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${pokemon.id}.png"
-          alt=""/>
-      </div>
-      <div class="info">
-        <span class="number">#${id}</span>
-        <h3 class="name">${name}</h3>
-        <small class="type">Type: <span>${type}</span></small>
-      </div>
-    </div>
+  //using data and creating cards with poke's own properties
+  const pokemonEl = document.createElement('div');
+  pokemonEl.classList.add('poke-box');
+  pokemonEl.style.backgroundColor = `${color}`;
+  pokemonEl.innerHTML = `
+        <img
+          src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/${id}.png"
+          alt="${name}"
+        />
+        <h4 class="poke-name">${name}</h4>
+        <p class="poke-id">#${id}</p>
+        <p class="poke-weight">${weight} kg</p>
+        <p class="poke-type">Type: ${type}</p>
   `;
-  pokemonEl.innerHTML = pokemonInnerHtml;
   pokeContainer.appendChild(pokemonEl);
 };
+//Search Bar
+searchInput.addEventListener('input', function () {
+  const pokeNames = document.querySelectorAll('.poke-name');
+  const search = searchInput.value.toLowerCase();
+  pokeNames.forEach((pokeName) => {
+    pokeName.parentElement.style.display = 'block';
+    if (!pokeName.innerHTML.toLowerCase().includes(search))
+      pokeName.parentElement.style.display = 'none';
+  });
+});
 
-fetchPokemon();
+initPokemon();
