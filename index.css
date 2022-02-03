@@ -1,10 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700&family=Lato&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700&family=Lato&display=swap');
 
 * {
   box-sizing: border-box;
 }
 body {
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
   background: #efefbb;
   background: linear-gradient(to right, #d4d3dd, #efefbb);
   display: flex;
@@ -29,6 +29,7 @@ h1 {
   justify-content: center;
   margin: 0 auto;
   max-width: 1200px;
+  border: 1px red solid;
 }
 .pokemon {
   background-color: #eee;
@@ -37,6 +38,7 @@ h1 {
   margin: 10px;
   padding: 20px;
   text-align: center;
+  border: 1px red solid;
 }
 .pokemon .img-container {
   background-color: rgba(255, 255, 255, 0.6);

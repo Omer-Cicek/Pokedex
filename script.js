@@ -1,4 +1,4 @@
-const pokeContainer = document.getElementById("poke-container");
+const pokeContainer = document.getElementById('poke-container');
 const pokemon_count = 20;
 
 const colors = {
@@ -34,14 +34,14 @@ const getPokemon = async (id) => {
 };
 
 const createPokemonCard = (pokemon) => {
-  const pokemonEl = document.createElement("div");
+  const pokemonEl = document.createElement('div');
 
-  pokemonEl.classList.add("pokemon");
+  pokemonEl.classList.add('pokemon');
 
   const name =
     pokemon.name[0].toUpperCase() + pokemon.name.slice(1).toLowerCase();
 
-  const id = pokemon.id.toString().padStart(3, "0");
+  const id = pokemon.id.toString().padStart(3, '0');
 
   const poki_types = pokemon.types.map((type) => type.type.name);
   const type = main_types.find((type) => poki_types.indexOf(type) > -1);
