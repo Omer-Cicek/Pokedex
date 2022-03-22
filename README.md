@@ -1,6 +1,6 @@
 # Pokedex
 
-![Design preview for the Testimonials grid section coding challenge](./design/desktop-preview.jpg)
+![Design preview for the Pokedex Api Project](PokedexGif.gif)
 
 ## Welcome! 👋
 
